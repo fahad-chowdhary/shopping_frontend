@@ -1,0 +1,53 @@
+
+.product_row{
+    display: flex;
+    flex-wrap: wrap;
+}
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 15%;
+    margin: 15px 10px;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  .container {
+    padding: 2px 16px;
+  }
+  .card_btn{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .buy_now_btn{
+    display: flex;
+    justify-content: center;
+    background-color: #989898;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .addbtn{
+    display: flex;
+    justify-content: center;
+    background-color: #606060;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .knowbtn{
+    display: flex;
+    justify-content: center;
+    background-color: 	#282828;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
