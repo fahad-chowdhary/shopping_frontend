@@ -4,8 +4,17 @@
 <!-- <h3>{{textApi}}</h3> -->
 <h2>Shopping Website</h2>
 </div>
+
+<div class="d-flex">
+<input
+type="text"
+class="cutom_input"
+placeholder="Search..."
+/>
+</div>
+
 <section class="product_row">
-<template v-for = "(item, itemindex) in Products">
+<template v-for = "(item, itemindex) in Products" id="my-table">
 <div class="card" :key="itemindex + 'products'">
   <img :src="item.image" alt="Avatar" style="width:100%">
   <div class="container">
@@ -21,7 +30,17 @@
 </div>
 </template>
 </section>
+<b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      @change="onChangePagination($event)"
+      aria-controls="my-table"
+    >
+    </b-pagination>
 </section>
+
+
 </template>
 
 <script>
@@ -29,18 +48,33 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+      perPage: 5,
+      currentPage: 1,
       msg: 'Welcome to Your Vue.js App',
       textApi : '',
       Products:[],
       ProductDetails:[],
     }
   },
+  computed: {
+      // rows() {
+      //   return this.Products.length
+      // }
+    },
   beforeMount(){
     this.firstApi();
     this.productsapi();
   },
   methods:{
-
+    onChangePagination: function(event) {
+      if (event === undefined) {
+        this.currentPage = 1;
+        this.productsapi();
+      } else {
+        this.currentPage = event;
+        this.productsapi();
+      }
+    },
     productDescription(id){
       // fetch(`http://localhost:3000/getProductDetails?id=${id}`).then((response) => {
       //   response.json()
@@ -63,9 +97,16 @@ export default {
     },
 
     productsapi(){
-        fetch("http://localhost:3000/getProducts").then((response)=>{
+      let payload = {
+        currentPage: this.currentPage,
+        limit: this.perPage,
+        search: this.searchValue,
+        searchType: this.searchType
+      };
+        fetch("https://fakestoreapi.com/products",payload).then((response)=>{
           return response.json()
         }).then((response) =>{
+          
           this.Products = response
             console.log('Products',response)
         })
